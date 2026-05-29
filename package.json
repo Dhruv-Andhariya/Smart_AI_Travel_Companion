@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cd Server && npm start",
     "postinstall": "cd Server && npm install && npx prisma generate",
-    "build": "cd Client && npm install && npm run build"
+    "build": "cd Client && npm install && npm run build",
+    "setup": "npm install"
   }
 }
