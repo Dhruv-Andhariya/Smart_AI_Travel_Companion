@@ -1,0 +1,10 @@
+{
+  "name": "trip-ai-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cd Server && npm start",
+    "postinstall": "cd Server && npm install && npx prisma generate",
+    "build": "cd Client && npm install && npm run build"
+  }
+}
