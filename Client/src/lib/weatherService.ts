@@ -1,12 +1,6 @@
-import axios from "axios";
-
-const API = "http://localhost:5000";
+import api from "./api";
 
 export const getWeather = async (city: string) => {
-
-  const response = await axios.get(
-    `${API}/weather/${city}`
-  );
-
+  const response = await api.get(`/weather/${city}`);
   return response.data;
 };
