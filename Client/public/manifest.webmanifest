@@ -1,0 +1,16 @@
+{
+  "name": "Trip AI",
+  "short_name": "Trip AI",
+  "description": "AI-powered travel planning with premium itineraries and a cinematic dashboard.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

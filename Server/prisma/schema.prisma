@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum TravelType {
+  SOLO
+  FRIENDS
+  FAMILY
+  COUPLE
+  BUSINESS
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String   @unique
+  password    String
+  role        Role     @default(USER)
+  createdAt   DateTime @default(now())
+
+  preferences UserPreference?
+  trips       Trip[]
+  notes       Note[]
+  reports     Report[]
+}
+
+model UserPreference {
+  id              Int    @id @default(autoincrement())
+  userId          Int    @unique
+  preferredBudget Float?
+  interests       String?
+  favoritePlaces  String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Trip {
+  id            Int          @id @default(autoincrement())
+  title         String
+  destination   String
+  startDate     DateTime?
+  endDate       DateTime?
+  budget        Float
+  totalDays     Int
+  travelType    TravelType
+  interests     String?
+  estimatedCost Float?
+  isPublic      Boolean      @default(false)
+  shareLink     String?
+
+  createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  itineraries Itinerary[]
+  activities  Activity[]
+  budgets     Budget[]
+  packingList PackingItem[]
+  weather     WeatherForecast[]
+  recommendations Recommendation[]
+}
+
+model Itinerary {
+  id          Int    @id @default(autoincrement())
+  dayNumber   Int
+  title       String
+  description String
+
+  tripId Int
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model Activity {
+  id          Int    @id @default(autoincrement())
+  name        String
+  category    String
+  location    String
+  price       Float?
+  description String?
+
+  tripId Int
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model Budget {
+  id            Int    @id @default(autoincrement())
+  transportCost Float?
+  hotelCost     Float?
+  foodCost      Float?
+  activityCost  Float?
+  totalCost     Float?
+
+  tripId Int
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model PackingItem {
+  id       Int     @id @default(autoincrement())
+  itemName String
+  category String?
+  packed   Boolean @default(false)
+
+  tripId Int
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model WeatherForecast {
+  id          Int      @id @default(autoincrement())
+  forecastDay DateTime
+  temperature Float
+  condition   String
+  rainChance  Float?
+
+  tripId Int
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model Recommendation {
+  id          Int    @id @default(autoincrement())
+  destination String
+  score       Float
+  reason      String?
+
+  tripId Int
+  trip   Trip @relation(fields: [tripId], references: [id], onDelete: Cascade)
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Report {
+  id          Int      @id @default(autoincrement())
+  reportType  String
+  description String?
+  createdAt   DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model DestinationTag {
+  id       Int    @id @default(autoincrement())
+  city     String
+  tagName  String
+}
+
+model ActivityTag {
+  id           Int    @id @default(autoincrement())
+  activityName String
+  tagName      String
+}
+
+model AdminLog {
+  id        Int      @id @default(autoincrement())
+  action    String
+  createdAt DateTime @default(now())
+}

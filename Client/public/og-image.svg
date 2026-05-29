@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="36" fill="#0B1120"/>
+  <circle cx="240" cy="160" r="140" fill="#8B5CF6" fill-opacity="0.35"/>
+  <circle cx="960" cy="120" r="190" fill="#06B6D4" fill-opacity="0.28"/>
+  <path d="M280 320L520 180L430 400L610 280L470 500L350 380L280 320Z" stroke="#8B5CF6" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="650" cy="230" r="18" fill="#06B6D4"/>
+  <circle cx="700" cy="268" r="12" fill="#8B5CF6"/>
+  <circle cx="745" cy="214" r="9" fill="#A78BFA"/>
+  <path d="M650 230L700 268L745 214" stroke="#06B6D4" stroke-width="6" stroke-linecap="round"/>
+  <text x="650" y="390" fill="#F8FBFF" font-size="86" font-family="Inter, sans-serif" font-weight="700">Trip AI</text>
+  <text x="650" y="458" fill="#C7D2FE" font-size="30" font-family="Inter, sans-serif">Plan smarter trips with AI-generated itineraries</text>
+</svg>
