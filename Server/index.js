@@ -5,7 +5,7 @@ require("dotenv").config();
 app.use(
   cors({
     // Normalize CLIENT_URL to avoid mismatches (trailing slash vs no-trailing)
-    origin: ((): any => {
+    origin: (() => {
       const raw = process.env.CLIENT_URL;
       if (!raw) return true;
       return raw.replace(/\/$/, "");
