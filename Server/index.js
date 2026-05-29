@@ -4,7 +4,12 @@ const app = express();
 require("dotenv").config();
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || true,
+    // Normalize CLIENT_URL to avoid mismatches (trailing slash vs no-trailing)
+    origin: ((): any => {
+      const raw = process.env.CLIENT_URL;
+      if (!raw) return true;
+      return raw.replace(/\/$/, "");
+    })(),
   }),
 );
 app.use(express.json());
